@@ -1,6 +1,6 @@
 #Bus Mall Marketing Survey user stories
 
-*##As A user...*
+##As A user...
 
 As a user, I want a fun experience, so I'll be more willing to complete the survery.
 
@@ -10,7 +10,7 @@ As a user, I want the site to actually work as the instructions state, so I don'
 
 As a user, I want the site to be quick and responsive, so I don't get distracted/frustrated and click away.
 
-*##As A Developer...*
+##As A Developer...
 
 As a developer, I want the code to be clean and DRY so that I can continue to work on it quickly and easily in future labs.
 
@@ -20,7 +20,7 @@ As a developer, I want to include a kind of input validation so stray clicks are
 
 As a developer, I want to constrain image sizes and be wary of file types to avoid rendering errors in the final product.
 
-*##As A Marketing Analyst...*
+##As A Marketing Analyst...
 
 As a marketing analyst, I want users to be encouraged to complete the survey so we get good data.
 
