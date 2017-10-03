@@ -1,0 +1,9 @@
+#images {
+  display: inline-block;
+}
+
+#images img {
+  border: 2px red;
+  width: 200px;
+  height: auto;
+}
