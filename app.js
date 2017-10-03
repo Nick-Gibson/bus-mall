@@ -41,29 +41,33 @@ var randomIndex = function(){
   numbThree = (Math.floor(Math.random() * Product.allProducts.length));
 };
 
-for (var i = 0; i < 25; i++){
-  function randomProduct(){
+function randomProduct(){
+  randomIndex();
+  while ((numbOne === numbTwo) || (numbOne === numbThree) || (numbTwo === numbThree) || ((oldArray.indexOf(numbOne) !== -1) || (oldArray.indexOf(numbTwo) !== -1) || (oldArray.indexOf(numbThree) !== -1))) {
     randomIndex();
-    while ((numbOne === numbTwo) || (numbOne === numbThree) || (numbTwo === numbThree) || ((oldArray.indexOf(numbOne) !== -1) || (oldArray.indexOf(numbTwo) !== -1) || (oldArray.indexOf(numbThree) !== -1))) {
-      randomIndex();
-    }
-    oldArray = [];
-    var imgEl = document.getElementById('render1');
-    imgEl.addEventListener('click', randomProduct);
-    // var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
-    imgEl.src = Product.allProducts[numbOne].filepath;
-    Product.allProducts[numbOne].clickCounter++;
-    var imgEl2 = document.getElementById('render2');
-    imgEl2.addEventListener('click', randomProduct);
-    imgEl2.src = Product.allProducts[numbTwo].filepath;
-    Product.allProducts[numbTwo].clickCounter++;
-    var imgEl3 = document.getElementById('render3');
-    imgEl3.addEventListener('click', randomProduct);
-    imgEl3.src = Product.allProducts[numbThree].filepath;
-    Product.allProducts[numbThree].clickCounter++;
-    oldArray.push(numbOne);
-    oldArray.push(numbTwo);
-    oldArray.push(numbThree);
   }
+  oldArray = [];
+  var imgEl = document.getElementById('render1');
+  imgEl.addEventListener('click', randomProduct);
+  // var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
+  imgEl.src = Product.allProducts[numbOne].filepath;
+  Product.allProducts[numbOne].clickCounter++;
+  var imgEl2 = document.getElementById('render2');
+  imgEl2.addEventListener('click', randomProduct);
+  imgEl2.src = Product.allProducts[numbTwo].filepath;
+  Product.allProducts[numbTwo].clickCounter++;
+  var imgEl3 = document.getElementById('render3');
+  imgEl3.addEventListener('click', randomProduct);
+  imgEl3.src = Product.allProducts[numbThree].filepath;
+  Product.allProducts[numbThree].clickCounter++;
+  oldArray.push(numbOne);
+  oldArray.push(numbTwo);
+  oldArray.push(numbThree);
 }
-randomProduct();
+
+// next steps: check that randomProduct() only loops x25, then create new function that uses innerHTML to blank out images and then replaces that content with new getElementById on an <ul> that appends .clickCounter and iterates through Product.allProducts[x].clickCounter!
+var i = 0;
+while (i < 25) {
+  randomProduct();
+  i++;
+}
