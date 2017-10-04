@@ -1,5 +1,12 @@
 'use strict';
 
+//Pageload:
+// if (localStore exists - literally just put the name of the local store here and let it eval to true/false; it'll return true if the ){
+//   load that data! (assign what there is to a var/object, push the string into the clickCounter - maybe by iterating through array?)
+// } else {
+//   do the things to create data (eg, first load of page for user; create instance)
+// };
+
 Product.allProducts = [];
 Product.render = document.getElementById('images');
 Product.totalClicks = 0;
@@ -58,12 +65,15 @@ function randomProduct(){
 function renderProduct() {
   var imgEl = document.getElementById('click1');
   imgEl.src = Product.allProducts[numbOne].filepath;
+  imgEl.alt = Product.allProducts[numbOne].alt;
   Product.allProducts[numbOne].timesRendered++;
   var imgEl2 = document.getElementById('click2');
   imgEl2.src = Product.allProducts[numbTwo].filepath;
+  imgEl2.alt = Product.allProducts[numbTwo].alt;
   Product.allProducts[numbTwo].timesRendered++;
   var imgEl3 = document.getElementById('click3');
   imgEl3.src = Product.allProducts[numbThree].filepath;
+  imgEl3.alt = Product.allProducts[numbThree].alt;
   Product.allProducts[numbThree].timesRendered++;
   console.log('render runs');
 }
@@ -73,17 +83,21 @@ function clickChoice(e) {
     return alert('Please click on an image itself');
   }
   Product.totalClicks += 1;
+  console.log(e.target.alt);
   for(var i = 0; i < Product.allProducts.length; i++) {
-    if(event.target.alt === Product.allProducts[i].alt) {
+    if(e.target.alt === Product.allProducts[i].alt) {
       Product.allProducts[i].clickCounter += 1;
+      console.log('woo');
     }
   }
+  console.log(Product.allProducts);
   randomProduct();
   renderProduct();
   if(Product.totalClicks >= 25) {
     Product.allProducts.removeEventListener('click', handleClick);
     // display the results
     showResults();
+    //add localStore. here for 'every 25'
   }
 };
 
