@@ -2,6 +2,7 @@
 
 Product.allProducts = [];
 Product.render = document.getElementById('images');
+Product.totalClicks = 0;
 
 function Product(name, filepath, alt){
   this.name = name;
@@ -46,11 +47,15 @@ function randomProduct(){
     numbOne = (Math.floor(Math.random() * Product.allProducts.length));
     numbTwo = (Math.floor(Math.random() * Product.allProducts.length));
     numbThree = (Math.floor(Math.random() * Product.allProducts.length));
+    console.log('test');
   }
   oldArray = [];
   oldArray.push(numbOne);
   oldArray.push(numbTwo);
   oldArray.push(numbThree);
+};
+
+function renderProduct() {
   var imgEl = document.getElementById('click1');
   imgEl.src = Product.allProducts[numbOne].filepath;
   Product.allProducts[numbOne].timesRendered++;
@@ -60,23 +65,32 @@ function randomProduct(){
   var imgEl3 = document.getElementById('click3');
   imgEl3.src = Product.allProducts[numbThree].filepath;
   Product.allProducts[numbThree].timesRendered++;
-};
+  console.log('render runs');
+}
 
 function clickChoice(e) {
   if(e.target.id === 'images') {
     return alert('Please click on an image itself');
   }
+  Product.totalClicks += 1;
   for(var i = 0; i < Product.allProducts.length; i++) {
     if(event.target.alt === Product.allProducts[i].alt) {
-      Product.allProducts[i].clickCounter++;
+      Product.allProducts[i].clickCounter += 1;
     }
-    randomProduct();
   }
-  if(Product.clickCounter < 25) {
+  randomProduct();
+  renderProduct();
+  if(Product.totalClicks >= 25) {
     Product.allProducts.removeEventListener('click', handleClick);
     // display the results
     showResults();
   }
 };
-Product.render.addEventListener('click', clickChoice);
+
+function showResults(){
+
+}
+
 randomProduct();
+renderProduct();
+Product.render.addEventListener('click', clickChoice);
