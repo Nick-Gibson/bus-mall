@@ -90,7 +90,7 @@ function clickChoice(e) {
     }
   }
   console.log(Product.allProducts);
-  if(Product.totalClicks > 25) {
+  if(Product.totalClicks >= 25) {
     // Product.render.removeEventListener('click', handleClick);
     return showResults();
   }
