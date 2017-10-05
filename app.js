@@ -91,7 +91,7 @@ function clickChoice(e) {
   }
   console.log(Product.allProducts);
   if(Product.totalClicks > 25) {
-    Product.allProducts.removeEventListener('click', handleClick);
+    // Product.render.removeEventListener('click', handleClick);
     return showResults();
   }
   randomProduct();
