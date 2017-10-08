@@ -1,9 +1,21 @@
+body {
+  background-image: url(img/hellbus.jpg);
+  background-size: cover;
+}
+
 #images {
-  display: inline-block;
+  margin:auto;
+  border: 10px black;
+  border-radius: 20px;
+  background-color: #ffa526;
 }
 
 #images img {
-  border: 2px red;
-  width: 200px;
-  height: auto;
+  border: 2px black;
+  border-radius: 20px;
+  background-color: #ffa526;
+  display: inline-block;
+  padding: 10px;
+  width: auto;
+  height: 250px;
 }
