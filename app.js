@@ -91,6 +91,7 @@ function clickChoice(e) {
   }
   console.log(Product.allProducts);
   if(Product.totalClicks >= 25) {
+    localStorage.clickCounter = JSON.stringify();
     // Product.render.removeEventListener('click', handleClick);
     return showResults();
   }
