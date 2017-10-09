@@ -1,15 +1,14 @@
 'use strict';
 
-//Pageload:
-// if (localStore exists - literally just put the name of the local store here and let it eval to true/false; it'll return true if the ){
-//   load that data! (assign what there is to a var/object, push the string into the clickCounter - maybe by iterating through array?)
-// } else {
-//   do the things to create data (eg, first load of page for user; create instance)
-// };
-
 Product.allProducts = [];
 Product.render = document.getElementById('images');
 Product.totalClicks = 0;
+var clickStorage = [];
+
+if (localStorage.clickStorage) {
+  clickStorage = JSON.parse(localStorage.clickStorage);
+  localStorage.clear();
+}
 
 function Product(name, filepath, alt){
   this.name = name;
@@ -54,7 +53,6 @@ function randomProduct(){
     numbOne = (Math.floor(Math.random() * Product.allProducts.length));
     numbTwo = (Math.floor(Math.random() * Product.allProducts.length));
     numbThree = (Math.floor(Math.random() * Product.allProducts.length));
-    console.log('test');
   }
   oldArray = [];
   oldArray.push(numbOne);
@@ -75,7 +73,6 @@ function renderProduct() {
   imgEl3.src = Product.allProducts[numbThree].filepath;
   imgEl3.alt = Product.allProducts[numbThree].alt;
   Product.allProducts[numbThree].timesRendered++;
-  console.log('render runs');
 }
 
 function clickChoice(e) {
@@ -83,15 +80,17 @@ function clickChoice(e) {
     return alert('Please click on an image itself');
   }
   Product.totalClicks += 1;
-  console.log(e.target.alt);
   for(var i = 0; i < Product.allProducts.length; i++) {
     if(e.target.alt === Product.allProducts[i].alt) {
       Product.allProducts[i].clickCounter += 1;
     }
   }
-  console.log(Product.allProducts);
   if(Product.totalClicks >= 25) {
-    localStorage.clickCounter = JSON.stringify();
+    for (i = 0; i < Product.allProducts.length; i++) {
+      clickStorage.push(Product.allProducts[i].clickCounter);
+    };
+    console.log(clickStorage);
+    localStorage.clickStorage = JSON.stringify(clickStorage);
     // Product.render.removeEventListener('click', handleClick);
     return showResults();
   }
@@ -105,7 +104,7 @@ function showResults(){
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: Product.allProducts.name,
       datasets: [{
         label: '# of Votes',
         data: Product.allProducts.clickCounter,
